@@ -24,7 +24,7 @@ class HashMap{
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
 
-        bucketValue.push({key, value});
+        bucketArray.push({key, value});
 
     }
 
@@ -32,10 +32,11 @@ class HashMap{
 
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
+        console.log(bucketArray)
 
-        for (let i = 0; i < bucketArray; i++){
+        for (let i = 0; i < bucketArray.length ; i++){
             if (bucketArray[i].key === key){
-                return bucketValue[i].value;
+                return bucketArray[i].value;
             }
         }
         return null
@@ -45,7 +46,7 @@ class HashMap{
 
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
-        for (let i = 0; i < bucketArray; i++){
+        for (let i = 0; i < bucketArray.length ; i++){
             if (bucketArray[i].key === key){
                 return true
             }
@@ -56,7 +57,7 @@ class HashMap{
     remove(key){
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
-        for (let i = 0; i < bucketArray; i++){
+        for (let i = 0; i < bucketArray.length; i++){
             if (bucketArray[i].key === key){
                 bucketArray.splice(i, 1)
                 return true
@@ -66,42 +67,56 @@ class HashMap{
     }
 
     length(){
-        const bucketIndex = this.hash(key) % this.capacity;
-        const bucketArray = this.buckets[bucketIndex];
-        let keyNumber;
-        for (let i = 0; i < bucketArray; i++){
-            if (bucketArray.key){
-                keyNumber++;
-                
+        
+        let keyNumber = 0;
+
+        for (let index = 0; index < this.buckets.length; index++){
+            const bucketArray = this.buckets[index];
+            for (let i = 0; i < bucketArray.length; i++){
+                if (this.buckets[index][i].key){
+                    keyNumber++;
+                } 
             }
         }
         return keyNumber;
     }
+    
 
     clear(){
         this.buckets = new Array(this.capacity).fill(null).map(() => []);
     }
 
+
     keys(){
         const keyArray = [];
-        const bucketIndex = this.hash(key) % this.capacity;
-        const bucketArray = this.buckets[bucketIndex];
-        for (let i = 0; i < bucketArray.length; i++){
-            keyArray.push(bucketArray[i].key);
+
+        for (let index = 0; index < this.buckets.length; index++){
+            const bucketArray = this.buckets[index];
+            for (let i = 0; i < bucketArray.length; i++){
+                if (this.buckets[index][i].key){
+                    keyArray.push(this.buckets[index][i].key);
+                } 
+            }
         }
         return keyArray;
     }
 
+
     values(){
         const valueArray = [];
-        const bucketIndex = this.hash(key) % this.capacity;
-        const bucketArray = this.buckets[bucketIndex];
-        for (let i = 0; i < bucketArray.length; i++){
-            valueArray.push(bucketArray[i].value);
+        
+        for (let index = 0; index < this.buckets.length; index++){
+            const bucketArray = this.buckets[index];
+            for (let i = 0; i < bucketArray.length; i++){
+                if (this.buckets[index][i].value){
+                    valueArray.push(this.buckets[index][i].value);
+                } 
+            }
         }
         return valueArray;
 
     }
+
 
     entries(){
         const entriesArray = [];

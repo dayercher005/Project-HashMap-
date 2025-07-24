@@ -17,4 +17,6 @@ test.set('lion', 'golden');
 
 console.log(test);
 console.log(test.entries());
-console.log(test.get('banana'));
+console.log(test.get('apple'));
+console.log(test.keys());
+console.log(test.values());
