@@ -15,8 +15,6 @@ test.set('jacket', 'blue');
 test.set('kite', 'pink');
 test.set('lion', 'golden');
 
+test.set('moon', 'silver');
+
 console.log(test);
-console.log(test.entries());
-console.log(test.get('apple'));
-console.log(test.keys());
-console.log(test.values());

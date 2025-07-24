@@ -1,5 +1,3 @@
-import {LinkedList} from "./LinkedList.js";
-
 export {HashMap}
 
 class HashMap{
@@ -9,6 +7,8 @@ class HashMap{
         this.capacity = 16;
         this.buckets = new Array(this.capacity).fill(null).map(() => []);
     }
+
+    
 
     hash(key){
         let hashCode = 0;
@@ -26,12 +26,18 @@ class HashMap{
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
 
-        if (this.length > this.capacity * this.load_factor){
-            this.capacity = this.capacity * 2;
-            this.buckets
+        for (let i = 0; i < bucketArray.length; i++){
+            if (bucketArray[i].key === key){
+                bucketArray[i].value = value
+                return
+            }
         }
 
         bucketArray.push({key, value});
+
+        if (this.length() > this.capacity * this.load_factor){
+            this.resize();
+        }
 
     }
 
