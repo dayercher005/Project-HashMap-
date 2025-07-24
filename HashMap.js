@@ -1,3 +1,5 @@
+import {LinkedList} from "./LinkedList.js";
+
 export {HashMap}
 
 class HashMap{
@@ -23,6 +25,11 @@ class HashMap{
 
         const bucketIndex = this.hash(key) % this.capacity;
         const bucketArray = this.buckets[bucketIndex];
+
+        if (this.length > this.capacity * this.load_factor){
+            this.capacity = this.capacity * 2;
+            this.buckets
+        }
 
         bucketArray.push({key, value});
 
