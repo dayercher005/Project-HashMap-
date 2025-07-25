@@ -8,7 +8,15 @@ class HashMap{
         this.buckets = new Array(this.capacity).fill(null).map(() => []);
     }
 
-    
+    resize(){
+        const prevBuckets = this.entries();
+        this.capacity = this.capacity * 2;
+        this.buckets = new Array(this.capacity).fill(null).map(() => []);
+
+        for(let i = 0; i < prevBuckets.length; i++){
+            this.set(prevBuckets[i][0], prevBuckets[i][1]);
+        }
+    }
 
     hash(key){
         let hashCode = 0;
@@ -133,8 +141,14 @@ class HashMap{
 
     entries(){
         const entriesArray = [];
-        for (let i = 0; i < this.buckets.length; i++){
-            entriesArray.push(this.buckets[i]);
+
+        for (let index = 0; index < this.buckets.length; index++){
+            const bucketArray = this.buckets[index];
+            for (let i = 0; i < bucketArray.length; i++){
+                if (this.buckets[index][i]){
+                    entriesArray.push([this.buckets[index][i].key, this.buckets[index][i].value]);
+                } 
+            }
         }
         return entriesArray;
     }
